@@ -645,7 +645,7 @@ export function QRStudioClient() {
                         <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Google 4.9 ★">
                           <GoogleLogo className="w-6 h-6" />
                         </div>
-                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                        <span className="text-[8.5px] font-normal text-neutral-500 tracking-normal truncate">
                           Google
                         </span>
                       </div>
@@ -655,7 +655,7 @@ export function QRStudioClient() {
                         <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Tripadvisor 5.0 ★">
                           <TripAdvisorLogo className="w-6 h-6" />
                         </div>
-                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                        <span className="text-[8.5px] font-normal text-neutral-500 tracking-normal truncate">
                           Tripadvisor
                         </span>
                       </div>
@@ -665,7 +665,7 @@ export function QRStudioClient() {
                         <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Booking.com 9.6">
                           <BookingLogo className="w-6 h-6" />
                         </div>
-                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                        <span className="text-[8.5px] font-normal text-neutral-500 tracking-normal truncate">
                           Booking
                         </span>
                       </div>
@@ -675,7 +675,7 @@ export function QRStudioClient() {
                         <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Agoda 9.2">
                           <AgodaLogo className="w-7 h-7" />
                         </div>
-                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                        <span className="text-[8.5px] font-normal text-neutral-500 tracking-normal truncate">
                           Agoda
                         </span>
                       </div>
@@ -685,7 +685,7 @@ export function QRStudioClient() {
                         <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Trip.com 9.7">
                           <TripComLogo className="w-6 h-6" />
                         </div>
-                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                        <span className="text-[8.5px] font-normal text-neutral-500 tracking-normal truncate">
                           Trip.com
                         </span>
                       </div>
@@ -693,8 +693,8 @@ export function QRStudioClient() {
                   </div>
 
                   {/* Powered by ZX0R signature */}
-                  <div className="mt-6 pt-3 border-t border-neutral-150 w-full flex items-center justify-center">
-                    <span className="text-[8.5px] font-medium tracking-[0.22em] text-neutral-400 uppercase font-mono select-none">
+                  <div className="mt-5 pt-2.5 border-t border-neutral-150 w-full flex items-center justify-center">
+                    <span className="text-[7.5px] font-normal tracking-[0.14em] text-neutral-400 font-mono select-none">
                       Powered by ZX0R
                     </span>
                   </div>
