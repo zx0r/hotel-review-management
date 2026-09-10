@@ -32,16 +32,16 @@ The system combines physical on-site collateral with a mobile web application:
   <table border="0">
     <tr>
       <td align="center" width="60%">
-        <b>A5 Acrylic Desk Stand Design (NFC + QR Dual Trigger)</b><br/>
-        <img src="public/assets/stand-mockup-card.png" alt="A5 Acrylic Stand Mockup - Sujet Marina Hotel Da Nang By Haviland" width="100%" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
+        <b>A5 Acrylic Desk Stand Design (NFC + QR Dual Trigger — 4K Master)</b><br/>
+        <img src="public/assets/haviland-stand-mockup-4096w.png" alt="A5 Acrylic Stand Mockup - Sujet Marina Hotel Da Nang By Haviland" width="100%" style="border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" />
         <br/>
-        <em>Fig. 1: Production A5 acrylic desk stand for front desk and room nightstands, showing the QR code, NFC tap zone, gold star rating, and review channel badges.</em>
+        <em>Fig. 1: Production A5 acrylic desk stand (4096px master render), showing the QR code, NFC tap zone, gold star rating, and review channel badges.</em>
       </td>
       <td align="center" width="40%">
-        <b>Vector QR Code (Level-H Error Correction)</b><br/>
-        <img src="public/assets/haviland-qr-code.svg" alt="Pure Vector QR Code for Sujet Marina Reviews Hub" width="85%" style="margin-top: 24px;" />
+        <b>Master QR Code (Level-H Error Correction — 4K Master)</b><br/>
+        <img src="public/assets/haviland-qr-4096x4096.png" alt="Master QR Code for Sujet Marina Reviews Hub" width="85%" style="margin-top: 24px;" />
         <br/>
-        <em>Fig. 2: Scalable vector QR code encoded with Level-H error correction (30% redundancy) to cleanly support the central Haviland brand mark.</em>
+        <em>Fig. 2: Master 4096×4096 QR code (Reed-Solomon Level H) with 30% error correction budget accommodating the central Haviland brand emblem (<a href="public/assets/haviland-qr-code.svg">Download Vector SVG</a>).</em>
       </td>
     </tr>
   </table>
