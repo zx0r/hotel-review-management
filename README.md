@@ -68,9 +68,9 @@ graph TD
     B -->|Positive Experience| C["Review Solicitation Channels"]
     B -->|Issue Reported| D["In-Stay Service Recovery"]
 
-    C --> E["Google Business Profile / Maps"]
+    C --> E["Google Business Profile and Maps"]
     C --> F["TripAdvisor"]
-    C --> G["OTAs (Booking.com, Agoda, Trip.com)"]
+    C --> G["Major OTAs Booking and Agoda"]
 
     E --> H["Higher Local 3-Pack Search Ranking"]
     F --> I["Improved Destination Ranking"]
@@ -196,13 +196,13 @@ graph LR
     A["QR Web Component"] -->|Read Shadow DOM| B["Extract SVG Path Geometry"]
     B -->|Assemble Document| C{"Select Export Mode"}
     
-    C -->|Pure QR| D["Transparent Vector .SVG"]
-    C -->|A5 Stand Card| E["Full A5 Layout .SVG"]
-    C -->|Rasterization| F["Off-Screen Canvas (300 DPI)"]
+    C -->|Pure QR| D["Transparent Vector SVG"]
+    C -->|A5 Stand Card| E["Full A5 Layout SVG"]
+    C -->|Rasterization| F["Off-Screen Canvas 300 DPI"]
     
-    F -->|Screen / Web| G["1024px PNG"]
-    F -->|A5 Print (300 DPI)| H["2048px PNG"]
-    F -->|Large Format / 4K| I["4096px PNG"]
+    F -->|Standard Web| G["1024px PNG"]
+    F -->|A5 Print 300 DPI| H["2048px PNG"]
+    F -->|Large Format 4K| I["4096px PNG"]
 ```
 
 * **Vector SVG Export**: Extracts clean vector paths from the `@bitjson/qr-code` web component for use in Adobe Illustrator, InDesign, or CAD laser cutters.
