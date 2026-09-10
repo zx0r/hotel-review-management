@@ -94,12 +94,11 @@ const ANIMATION_PRESETS = [
 ] as const;
 
 const TOUCHPOINT_SHORTCUTS = [
-  { label: 'Root Hub', url: 'https://havilandhouse-reviews.vercel.app' },
+  { label: 'Main Hub', url: 'https://havilandhouse-reviews.vercel.app' },
   { label: 'Reception Desk', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=reception' },
-  { label: 'Room Table Stand', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=room' },
+  { label: 'Room Stand', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=room' },
   { label: 'Keycard Sleeve', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=keycard' },
-  { label: 'Breakfast / Restaurant', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=restaurant' },
-  { label: 'Direct Zalo Concierge', url: 'https://zalo.me/0935515180' },
+  { label: 'Restaurant', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=restaurant' },
 ];
 
 const LOGO_OPTIONS = [
@@ -640,6 +639,7 @@ export function QRStudioClient() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
+              type="button"
               onClick={() => window.print()}
               className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white bg-neutral-800/80 hover:bg-neutral-700/80 border border-neutral-700/60 px-3 py-1.5 rounded-xl transition-all shadow-xs"
             >
@@ -689,6 +689,7 @@ export function QRStudioClient() {
               <div className="w-full flex items-center justify-between mb-6 z-10">
                 <div className="flex bg-neutral-900/90 p-1 rounded-2xl border border-neutral-800 text-xs">
                   <button
+                    type="button"
                     onClick={() => {
                       setPreviewMode('qr-only');
                       setExportTarget('qr');
@@ -702,6 +703,7 @@ export function QRStudioClient() {
                     Pure QR
                   </button>
                   <button
+                    type="button"
                     onClick={() => {
                       setPreviewMode('stand-mockup');
                       setExportTarget('stand');
@@ -896,6 +898,7 @@ export function QRStudioClient() {
                     <span>Interactive SVG Animations</span>
                   </span>
                   <button
+                    type="button"
                     onClick={() => triggerAnimation()}
                     className="text-xs font-semibold text-[#E5D0B5] hover:text-white inline-flex items-center gap-1 transition-colors"
                   >
@@ -913,6 +916,7 @@ export function QRStudioClient() {
                     </span>
                   </div>
                   <button
+                    type="button"
                     onClick={() => setIsAutoLoop(!isAutoLoop)}
                     className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                       isAutoLoop ? 'bg-emerald-500' : 'bg-neutral-700'
@@ -929,6 +933,7 @@ export function QRStudioClient() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                   {ANIMATION_PRESETS.map((preset) => (
                     <button
+                      type="button"
                       key={preset.id}
                       onClick={() => {
                         setActiveAnimation(preset.id);
@@ -964,6 +969,7 @@ export function QRStudioClient() {
               {/* Asset Mode Switcher: Full Stand Mockup vs Pure QR Code */}
               <div className="flex bg-neutral-900/90 p-1 rounded-2xl border border-neutral-800 text-xs">
                 <button
+                  type="button"
                   onClick={() => setExportTarget('stand')}
                   className={`flex-1 py-1.5 px-3 rounded-xl font-medium transition-all flex items-center justify-center gap-1.5 ${
                     exportTarget === 'stand'
@@ -975,6 +981,7 @@ export function QRStudioClient() {
                   <span>Full Stand Card</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => setExportTarget('qr')}
                   className={`flex-1 py-1.5 px-3 rounded-xl font-medium transition-all flex items-center justify-center gap-1.5 ${
                     exportTarget === 'qr'
@@ -993,6 +1000,7 @@ export function QRStudioClient() {
                 <div className="grid grid-cols-3 gap-1.5 flex-1">
                   {(['1024', '2048', '4096'] as const).map((res) => (
                     <button
+                      type="button"
                       key={res}
                       onClick={() => setExportRes(res)}
                       className={`py-1 rounded-lg border text-center font-medium transition-all ${
@@ -1009,6 +1017,7 @@ export function QRStudioClient() {
 
               <div className="grid grid-cols-2 gap-3">
                 <button
+                  type="button"
                   onClick={() => handleDownloadSVG()}
                   disabled={isDownloading}
                   className="w-full flex items-center justify-center gap-2 bg-[#C5A880] hover:bg-[#D4BC98] text-neutral-950 font-semibold py-3 px-4 rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-[#C5A880]/10 text-xs sm:text-sm"
@@ -1018,6 +1027,7 @@ export function QRStudioClient() {
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => handleDownloadPNG()}
                   disabled={isDownloading}
                   className="w-full flex items-center justify-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 px-4 rounded-2xl transition-all active:scale-[0.98] border border-neutral-700/80 text-xs sm:text-sm"
@@ -1029,6 +1039,7 @@ export function QRStudioClient() {
 
               <div className="flex items-center gap-2 pt-2 border-t border-neutral-800/80">
                 <button
+                  type="button"
                   onClick={handleCopySVG}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 text-xs text-neutral-300 hover:text-white bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-800 py-2 rounded-xl transition-colors"
                 >
@@ -1036,6 +1047,7 @@ export function QRStudioClient() {
                   <span>{isSvgCopied ? 'SVG Copied!' : exportTarget === 'stand' ? 'Copy Stand SVG' : 'Copy SVG Code'}</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => window.print()}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 text-xs text-neutral-300 hover:text-white bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-800 py-2 rounded-xl transition-colors"
                 >
@@ -1056,6 +1068,7 @@ export function QRStudioClient() {
                   <span>Target Destination (Encoded URL)</span>
                 </label>
                 <button
+                  type="button"
                   onClick={handleCopyUrl}
                   className="text-xs text-neutral-400 hover:text-white inline-flex items-center gap-1 transition-colors"
                 >
@@ -1068,6 +1081,11 @@ export function QRStudioClient() {
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                  }
+                }}
                 placeholder="https://havilandhouse-reviews.vercel.app"
                 className="w-full bg-neutral-900/90 border border-neutral-700/80 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] font-mono transition-all"
               />
@@ -1080,6 +1098,7 @@ export function QRStudioClient() {
                 <div className="flex flex-wrap gap-2">
                   {TOUCHPOINT_SHORTCUTS.map((chip) => (
                     <button
+                      type="button"
                       key={chip.label}
                       onClick={() => setUrl(chip.url)}
                       className={`text-xs py-1.5 px-3 rounded-xl border transition-all ${
@@ -1107,6 +1126,7 @@ export function QRStudioClient() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {PRESET_THEMES.map((theme) => (
                   <button
+                    type="button"
                     key={theme.id}
                     onClick={() => handleApplyTheme(theme)}
                     className={`p-4 rounded-2xl border text-left transition-all relative flex flex-col gap-2 ${
@@ -1244,6 +1264,7 @@ export function QRStudioClient() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {LOGO_OPTIONS.map((opt) => (
                   <button
+                    type="button"
                     key={opt.id}
                     onClick={() => {
                       setSelectedLogo(opt.path);
