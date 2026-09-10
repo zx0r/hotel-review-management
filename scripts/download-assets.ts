@@ -1,7 +1,7 @@
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const PUBLIC_DIR = join(import.meta.dir, "..", "public");
+const PUBLIC_DIR = join(process.cwd(), "public");
 
 const ASSETS = [
   {
@@ -41,7 +41,7 @@ async function download() {
         continue;
       }
       const buffer = await res.arrayBuffer();
-      await Bun.write(join(PUBLIC_DIR, asset.dest), buffer);
+      writeFileSync(join(PUBLIC_DIR, asset.dest), Buffer.from(buffer));
       console.log(`Saved ${asset.dest} (${buffer.byteLength} bytes)`);
     } catch (err) {
       console.error(`Error downloading ${asset.url}:`, err);

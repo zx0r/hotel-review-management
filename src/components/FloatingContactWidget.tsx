@@ -75,7 +75,7 @@ export function FloatingContactWidget() {
   return (
     <div
       className="fixed right-5 sm:right-[26px] z-[999] flex flex-col items-center gap-3.5 bottom-6 sm:bottom-8"
-      style={{ WebKitTransform: 'translate3d(0,0,0)', transform: 'translate3d(0,0,0)' }}
+      style={{ WebkitTransform: 'translate3d(0,0,0)', transform: 'translate3d(0,0,0)' }}
     >
       <div className="relative">
         <div

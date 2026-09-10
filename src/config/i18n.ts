@@ -257,4 +257,8 @@ export const TRANSLATIONS = {
   },
 } as const;
 
-export type TranslationDictionary = (typeof TRANSLATIONS)['vi'];
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends object ? DeepString<T[K]> : string;
+};
+
+export type TranslationDictionary = DeepString<(typeof TRANSLATIONS)['vi']>;

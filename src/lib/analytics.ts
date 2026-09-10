@@ -3,15 +3,24 @@ export type ReviewHubEventType =
   | 'platform_click'
   | 'direct_website_click'
   | 'concierge_call_click'
-  | 'concierge_email_click';
+  | 'concierge_email_click'
+  | 'star_rating_select'
+  | 'concierge_message_click'
+  | 'floating_widget_contact_click'
+  | 'floating_widget_zalo_click'
+  | 'floating_widget_phone_click'
+  | 'floating_widget_toggle';
 
 export interface AnalyticsPayload {
-  hotelId: string;
+  hotelId?: string;
   platformId?: string;
   touchpoint?: string;
   roomNumber?: string;
   source?: string;
   timestamp?: string;
+  preSelectedRating?: number;
+  number?: string;
+  [key: string]: any;
 }
 
 export function trackReviewHubEvent(
