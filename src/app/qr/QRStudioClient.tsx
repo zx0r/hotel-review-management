@@ -133,6 +133,42 @@ export function QRStudioClient() {
   const [qrLoaded, setQrLoaded] = useState(false);
 
   const qrRef = useRef<HTMLElement | null>(null);
+  const standQrRef = useRef<HTMLElement | null>(null);
+
+  // Robust resolver for whichever <qr-code> element is mounted
+  const getActiveQrElement = (): HTMLElement | null => {
+    if (typeof document === 'undefined') return null;
+    if (previewMode === 'stand-mockup' && standQrRef.current?.shadowRoot?.querySelector('svg')) {
+      return standQrRef.current;
+    }
+    if (qrRef.current?.shadowRoot?.querySelector('svg')) {
+      return qrRef.current;
+    }
+    if (standQrRef.current?.shadowRoot?.querySelector('svg')) {
+      return standQrRef.current;
+    }
+    const all = document.querySelectorAll('qr-code');
+    for (const el of Array.from(all)) {
+      if ((el as HTMLElement).shadowRoot?.querySelector('svg')) {
+        return el as HTMLElement;
+      }
+    }
+    return null;
+  };
+
+  // Trigger web component animation across all active QR elements
+  const triggerAnimation = (presetName?: string) => {
+    const anim = presetName || activeAnimation;
+    if (typeof document === 'undefined') return;
+    const all = document.querySelectorAll('qr-code');
+    all.forEach((el) => {
+      try {
+        (el as any)?.animateQRCode?.(anim);
+      } catch (err) {
+        console.warn('Animation trigger error:', err);
+      }
+    });
+  };
 
   // Auto-looping continuous animation (like in the bitjson video)
   useEffect(() => {
@@ -152,18 +188,6 @@ export function QRStudioClient() {
     setBgColor(preset.bgColor);
   };
 
-  // Trigger web component animation
-  const triggerAnimation = (presetName?: string) => {
-    const anim = presetName || activeAnimation;
-    if (qrRef.current && (qrRef.current as any).animateQRCode) {
-      try {
-        (qrRef.current as any).animateQRCode(anim);
-      } catch (err) {
-        console.warn('Animation trigger error:', err);
-      }
-    }
-  };
-
   // Hook into codeRendered event
   useEffect(() => {
     const checkDefined = () => {
@@ -177,19 +201,17 @@ export function QRStudioClient() {
   }, []);
 
   useEffect(() => {
-    const el = qrRef.current;
-    if (!el) return;
-
+    const all = typeof document !== 'undefined' ? document.querySelectorAll('qr-code') : [];
     const onRendered = () => {
       setQrLoaded(true);
       triggerAnimation();
     };
 
-    el.addEventListener('codeRendered', onRendered);
+    all.forEach((el) => el.addEventListener('codeRendered', onRendered));
     return () => {
-      el.removeEventListener('codeRendered', onRendered);
+      all.forEach((el) => el.removeEventListener('codeRendered', onRendered));
     };
-  }, [url, moduleColor, ringColor, centerColor, maskRatio, selectedLogo, customLogoUrl]);
+  }, [url, moduleColor, ringColor, centerColor, maskRatio, selectedLogo, customLogoUrl, previewMode]);
 
   // Handle custom image upload
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -209,22 +231,23 @@ export function QRStudioClient() {
 
   const activeIconPath = customLogoUrl && selectedLogo === customLogoUrl ? customLogoUrl : selectedLogo;
 
-  // Extract pure standalone SVG from shadowRoot
+  // Extract pure standalone SVG from active shadowRoot
   const getCleanSVGString = async (): Promise<string | null> => {
-    const el = qrRef.current;
+    const el = getActiveQrElement();
     if (!el || !el.shadowRoot) return null;
 
     const innerSvg = el.shadowRoot.querySelector('svg');
     if (!innerSvg) return null;
 
     const clone = innerSvg.cloneNode(true) as SVGSVGElement;
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     const viewBox = clone.getAttribute('viewBox') || '-22.5 -22.5 45 45';
-    const [, , vbWidth, vbHeight] = viewBox.split(' ').map(Number);
+    const [vbX, vbY, vbWidth, vbHeight] = viewBox.split(' ').map(Number);
 
     // Insert background rect if non-transparent
     if (bgColor && bgColor !== 'transparent') {
       const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      const [vbX, vbY] = viewBox.split(' ').map(Number);
       bgRect.setAttribute('x', String(vbX));
       bgRect.setAttribute('y', String(vbY));
       bgRect.setAttribute('width', String(vbWidth));
@@ -252,6 +275,7 @@ export function QRStudioClient() {
         const iconY = -iconSize / 2;
 
         const imageEl = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        imageEl.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', base64Icon);
         imageEl.setAttribute('href', base64Icon);
         imageEl.setAttribute('x', String(iconX));
         imageEl.setAttribute('y', String(iconY));
@@ -271,7 +295,11 @@ export function QRStudioClient() {
   const handleDownloadSVG = async () => {
     setIsDownloading(true);
     try {
-      const svgString = await getCleanSVGString();
+      let svgString = await getCleanSVGString();
+      if (!svgString) {
+        await new Promise((r) => setTimeout(r, 200));
+        svgString = await getCleanSVGString();
+      }
       if (!svgString) {
         alert('QR code is still initializing. Please wait a moment.');
         return;
@@ -280,23 +308,37 @@ export function QRStudioClient() {
       const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
       const downloadUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
+      a.style.display = 'none';
       a.href = downloadUrl;
-      a.download = `haviland-qr-${new URL(url).hostname || 'sujet-marina'}.svg`;
+      let hostName = 'haviland';
+      try {
+        hostName = new URL(url).hostname;
+      } catch {}
+      a.download = `haviland-qr-${hostName}.svg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(downloadUrl);
+      setTimeout(() => URL.revokeObjectURL(downloadUrl), 2000);
+    } catch (err) {
+      console.error('Download SVG error:', err);
     } finally {
       setIsDownloading(false);
     }
   };
 
-  // Download High-Resolution PNG (Canvas rasterizer)
+  // Download High-Resolution PNG (Canvas rasterizer with image fallback)
   const handleDownloadPNG = async () => {
     setIsDownloading(true);
     try {
-      const svgString = await getCleanSVGString();
-      if (!svgString) return;
+      let svgString = await getCleanSVGString();
+      if (!svgString) {
+        await new Promise((r) => setTimeout(r, 200));
+        svgString = await getCleanSVGString();
+      }
+      if (!svgString) {
+        alert('QR code is still initializing. Please wait a moment.');
+        return;
+      }
 
       const size = parseInt(exportRes, 10) || 2048;
       const canvas = document.createElement('canvas');
@@ -309,31 +351,68 @@ export function QRStudioClient() {
       ctx.fillStyle = bgColor || '#ffffff';
       ctx.fillRect(0, 0, size, size);
 
-      const img = new Image();
-      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-      const blobUrl = URL.createObjectURL(svgBlob);
+      const loadImg = (imgUrl: string): Promise<HTMLImageElement> => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          if (imgUrl.startsWith('http://') || imgUrl.startsWith('https://')) {
+            img.crossOrigin = 'anonymous';
+          }
+          img.onload = () => resolve(img);
+          img.onerror = (e) => reject(e);
+          img.src = imgUrl;
+        });
+      };
 
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => {
-          ctx.drawImage(img, 0, 0, size, size);
-          URL.revokeObjectURL(blobUrl);
-          resolve();
-        };
-        img.onerror = reject;
-        img.src = blobUrl;
-      });
+      let svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      let blobUrl = URL.createObjectURL(svgBlob);
+
+      let drawnSuccessfully = false;
+      try {
+        const renderedSvg = await loadImg(blobUrl);
+        ctx.drawImage(renderedSvg, 0, 0, size, size);
+        drawnSuccessfully = true;
+      } catch (canvasErr) {
+        console.warn('Canvas SVG load with embedded image failed, applying separate composite fallback...', canvasErr);
+        // Fallback: strip embedded <image> from SVG so SVG draws cleanly, then draw logo directly on canvas
+        const cleanSvgWithoutImage = svgString.replace(/<image[\s\S]*?\/>/gi, '');
+        URL.revokeObjectURL(blobUrl);
+        svgBlob = new Blob([cleanSvgWithoutImage], { type: 'image/svg+xml;charset=utf-8' });
+        blobUrl = URL.createObjectURL(svgBlob);
+        const fallbackSvgImg = await loadImg(blobUrl);
+        ctx.drawImage(fallbackSvgImg, 0, 0, size, size);
+
+        // Draw center logo directly onto canvas
+        if (activeIconPath) {
+          try {
+            const logoImg = await loadImg(activeIconPath);
+            const iconSize = size * 0.22;
+            const iconPos = (size - iconSize) / 2;
+            ctx.drawImage(logoImg, iconPos, iconPos, iconSize, iconSize);
+          } catch (logoErr) {
+            console.warn('Could not draw center logo on canvas fallback:', logoErr);
+          }
+        }
+        drawnSuccessfully = true;
+      } finally {
+        URL.revokeObjectURL(blobUrl);
+      }
+
+      if (!drawnSuccessfully) return;
 
       canvas.toBlob((pngBlob) => {
         if (!pngBlob) return;
         const pngUrl = URL.createObjectURL(pngBlob);
         const a = document.createElement('a');
+        a.style.display = 'none';
         a.href = pngUrl;
         a.download = `haviland-qr-${exportRes}x${exportRes}.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(pngUrl);
+        setTimeout(() => URL.revokeObjectURL(pngUrl), 2000);
       }, 'image/png');
+    } catch (err) {
+      console.error('Download PNG error:', err);
     } finally {
       setIsDownloading(false);
     }
@@ -518,6 +597,7 @@ export function QRStudioClient() {
                   {/* Enlarged QR Code Canvas */}
                   <div className="p-3.5 sm:p-4 bg-white rounded-3xl border border-neutral-150 shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
                     <QRCodeElement
+                      ref={standQrRef}
                       contents={url}
                       module-color={moduleColor}
                       position-ring-color={ringColor}
