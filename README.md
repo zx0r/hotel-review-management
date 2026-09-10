@@ -141,11 +141,24 @@ By placing direct contact links prominently alongside review buttons on the Revi
 * **NFC Tag Integration**: Thin NTAG213/NTAG215 stickers are affixed behind the acrylic card or embedded inside the keycard sleeve. When a guest taps their phone, iOS and Android automatically open the review hub URL without opening any third-party app.
 * **Level-H QR Code**: Uses **30% Reed-Solomon error correction**. This high level of redundancy allows a custom hotel logo to sit in the center of the QR matrix while ensuring fast scanning even under dim hotel room lighting ($<50 \text{ lux}$) or with minor surface scratches.
 
-### 3.2 Key Touchpoint Locations
+### 3.2 Physical Touchpoints & Multi-Location Attribution (`touchpoint` parameter)
 
-1. **Front Desk / Reception**: High-visibility acrylic stand on the counter, used by staff during check-in or checkout.
-2. **In-Room Bedside / Desk**: Placed next to the room telephone or bedside control panel for relaxed browsing in the evening.
-3. **Key Card Holder / Wallet**: Given directly to the guest at check-in, kept in their pocket or bag throughout their stay.
+By default, the platform uses clean, canonical URLs (e.g. `https://havilandhouse-reviews.vercel.app`) to minimize QR code data density and maximize optical scanning speed across mobile devices.
+
+For hospitality groups managing **multiple properties, distinct physical buildings, or multiple departments**, the platform supports optional query parameters for granular attribution and scan telemetry:
+
+1. **Physical Touchpoint Tagging (`?touchpoint=...`)**:
+   * **Reception / Front Desk**: `https://havilandhouse-reviews.vercel.app/?touchpoint=reception`
+   * **In-Room Bedside / Desk Stand**: `https://havilandhouse-reviews.vercel.app/?touchpoint=room`
+   * **Keycard Sleeve / Holder**: `https://havilandhouse-reviews.vercel.app/?touchpoint=keycard`
+   * **Restaurant & Breakfast Buffet**: `https://havilandhouse-reviews.vercel.app/?touchpoint=restaurant`
+   * **Rooftop Bar / Pool Zone**: `https://havilandhouse-reviews.vercel.app/?touchpoint=poolbar`
+
+2. **Multi-Property Scale (`?hotel=...` or route slug)**:
+   * When deploying across a chain or portfolio of properties with different geographic locations, parameters allow a single deployed application to dynamically load each hotel's specific branding, direct review links (Google Places ID, TripAdvisor ID, OTA hotel IDs), and duty manager contact channels.
+
+3. **Telemetry & Scan Analytics**:
+   * Incoming touchpoint identifiers are captured by `src/lib/analytics.ts` and logged with timestamps to analytics engines (Google Analytics 4, Vercel Web Analytics, or non-blocking Beacon API), giving general managers exact visibility into which physical locations generate the highest review conversion rates.
 
 ---
 

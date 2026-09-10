@@ -94,11 +94,35 @@ const ANIMATION_PRESETS = [
 ] as const;
 
 const TOUCHPOINT_SHORTCUTS = [
-  { label: 'Main Hub', url: 'https://havilandhouse-reviews.vercel.app' },
-  { label: 'Reception Desk', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=reception' },
-  { label: 'Room Stand', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=room' },
-  { label: 'Keycard Sleeve', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=keycard' },
-  { label: 'Restaurant', url: 'https://havilandhouse-reviews.vercel.app/?touchpoint=restaurant' },
+  { label: 'Review Hub (Main)', url: 'https://havilandhouse-reviews.vercel.app' },
+  {
+    label: 'Google Reviews Direct',
+    url: 'https://www.google.com/maps/place/Sujet+Marina+Hotel+Da+Nang+By+Haviland/@16.0793157,108.2230923,19z/data=!4m11!3m10!1s0x314219389f667657:0x84d56c065e4f42ab!5m2!4m1!1i2!8m2!3d16.0793158!4d108.2235571!9m1!1b1!16s%2Fg%2F11z3mp45j9?entry=ttu',
+  },
+  {
+    label: 'Tripadvisor Direct',
+    url: 'https://www.tripadvisor.com/UserReviewEdit-g25231262-d34369075-Sujet_Marina_Da_Nang_Hotel_by_Haviland-Hai_Chau_Da_Nang.html',
+  },
+  {
+    label: 'Booking.com',
+    url: 'https://www.booking.com/hotel/vn/sujet-marina-da-nang-by-haviland.html#tab-reviews',
+  },
+  {
+    label: 'Agoda',
+    url: 'https://www.agoda.com/sujet-marina-da-nang-hotel-by-haviland/hotel/da-nang-vn.html#reviews',
+  },
+  {
+    label: 'Trip.com',
+    url: 'https://www.trip.com/hotels/da-nang-hotel-detail-134108126/sujet-marina-hotel-da-nang-by-haviland/',
+  },
+  {
+    label: 'Official Zalo (Haviland OA)',
+    url: 'https://zalo.me/3499485966939792994',
+  },
+  {
+    label: 'Official Hotel Website',
+    url: 'https://havilandhouse.com/sujet-marina-da-nang-hotel-by-haviland-smd',
+  },
 ];
 
 const LOGO_OPTIONS = [
@@ -1093,7 +1117,7 @@ export function QRStudioClient() {
               {/* Touchpoint Shortcuts */}
               <div className="flex flex-col gap-1.5">
                 <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
-                  Hotel Touchpoint Presets:
+                  Destination Presets (Clean URLs):
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {TOUCHPOINT_SHORTCUTS.map((chip) => (
