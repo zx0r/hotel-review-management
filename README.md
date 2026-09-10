@@ -106,19 +106,19 @@ sequenceDiagram
     actor Guest as Hotel Guest
     participant Stand as A5 Stand or Keycard
     participant Hub as Review Hub Page
-    participant Staff as Front Desk or Duty Manager
+    participant Staff as Front Desk or Manager
     participant Public as Google or TripAdvisor
 
     Guest->>Stand: Taps phone (NFC) or scans QR
     Stand->>Hub: Opens Review Hub in mobile browser
     alt Satisfied Guest
-        Hub->>Public: 1-click link to Google / OTA review page
+        Hub->>Public: 1-click link to Google or OTA review page
         Guest->>Public: Submits 5-star rating and comment
     else Issue or Request
-        Hub->>Staff: Direct link to Zalo / phone concierge
-        Guest->>Staff: Reports issue (e.g., room amenities, AC, requests)
-        Staff->>Guest: Immediate resolution and personal attention
-        Note over Guest,Public: Problem solved on-site; negative public review prevented
+        Hub->>Staff: Direct link to Zalo or phone concierge
+        Guest->>Staff: Reports issue directly to staff
+        Staff->>Guest: Resolves issue on-site before checkout
+        Note over Staff: Issue resolved on-site
     end
 ```
 
