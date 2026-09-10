@@ -19,9 +19,20 @@ import {
   ExternalLink,
   ShieldCheck,
   Layers,
-  ArrowLeft,
   Star,
+  Activity,
+  Code2,
+  ArrowLeft,
 } from 'lucide-react';
+import {
+  GoogleLogo,
+  TripAdvisorLogo,
+  BookingLogo,
+  AgodaLogo,
+  TripComLogo,
+  HostelworldLogo,
+  HotelsComLogo,
+} from '@/components/BrandIcons';
 
 // Custom element tag reference for React 19
 const QRCodeElement = 'qr-code' as any;
@@ -76,11 +87,11 @@ const PRESET_THEMES: ColorThemePreset[] = [
 ];
 
 const ANIMATION_PRESETS = [
+  { id: 'RadialRipple', label: 'Harmonic Ripple (Video)' },
+  { id: 'RadialRippleIn', label: 'Vortex Ripple' },
   { id: 'MaterializeIn', label: 'Materialize' },
-  { id: 'FadeInCenterOut', label: 'Center Ripple' },
-  { id: 'RadialRipple', label: 'Radial' },
+  { id: 'FadeInCenterOut', label: 'Center Pulse' },
   { id: 'FadeInTopDown', label: 'Top Down' },
-  { id: 'RadialRippleIn', label: 'Vortex In' },
 ] as const;
 
 const TOUCHPOINT_SHORTCUTS = [
@@ -110,7 +121,9 @@ export function QRStudioClient() {
   const [selectedLogo, setSelectedLogo] = useState('/logo-haviland-house.png');
   const [customLogoUrl, setCustomLogoUrl] = useState<string | null>(null);
   const [maskRatio, setMaskRatio] = useState('1.0');
-  const [activeAnimation, setActiveAnimation] = useState<string>('MaterializeIn');
+  const [activeAnimation, setActiveAnimation] = useState<string>('RadialRipple');
+  const [isAutoLoop, setIsAutoLoop] = useState<boolean>(true);
+  const [loopIntervalMs, setLoopIntervalMs] = useState<number>(2400);
   const [previewMode, setPreviewMode] = useState<'qr-only' | 'stand-mockup'>('qr-only');
   const [exportRes, setExportRes] = useState<'1024' | '2048' | '4096'>('2048');
 
@@ -121,6 +134,15 @@ export function QRStudioClient() {
   const [qrLoaded, setQrLoaded] = useState(false);
 
   const qrRef = useRef<HTMLElement | null>(null);
+
+  // Auto-looping continuous animation (like in the bitjson video)
+  useEffect(() => {
+    if (!isAutoLoop) return;
+    const interval = setInterval(() => {
+      triggerAnimation();
+    }, loopIntervalMs);
+    return () => clearInterval(interval);
+  }, [isAutoLoop, loopIntervalMs, activeAnimation]);
 
   // Apply theme preset
   const handleApplyTheme = (preset: ColorThemePreset) => {
@@ -439,7 +461,10 @@ export function QRStudioClient() {
               {/* Canvas Area */}
               {previewMode === 'qr-only' ? (
                 <div
-                  className="p-6 sm:p-8 rounded-3xl shadow-2xl transition-all duration-300 border border-neutral-200/20 relative group"
+                  onClick={() => triggerAnimation('RadialRipple')}
+                  onMouseEnter={() => triggerAnimation('RadialRipple')}
+                  title="Click or hover to trigger harmonic ripple"
+                  className="p-6 sm:p-8 rounded-3xl shadow-2xl transition-all duration-300 border border-neutral-200/20 relative group cursor-pointer select-none"
                   style={{ backgroundColor: bgColor }}
                 >
                   <QRCodeElement
@@ -473,7 +498,10 @@ export function QRStudioClient() {
                 </div>
               ) : (
                 /* Acrylic Stand Mockup */
-                <div className="w-full max-w-[320px] bg-white text-neutral-900 rounded-[28px] p-6 shadow-2xl border-4 border-neutral-200/80 flex flex-col items-center text-center relative">
+                <div
+                  onClick={() => triggerAnimation('RadialRipple')}
+                  className="w-full max-w-[330px] bg-white text-neutral-900 rounded-[28px] p-6 shadow-2xl border-4 border-neutral-200/80 flex flex-col items-center text-center relative cursor-pointer select-none"
+                >
                   <div className="w-10 h-1 rounded-full bg-neutral-200 mb-4" />
                   <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C5A880] mb-1">
                     HAVILAND HOUSE
@@ -523,8 +551,35 @@ export function QRStudioClient() {
                   <p className="text-[11px] text-neutral-500 mt-0.5">
                     Quét mã để chia sẻ cảm nhận kỳ nghỉ
                   </p>
-                  <div className="mt-3 pt-3 border-t border-neutral-100 w-full flex items-center justify-center gap-2 text-[10px] font-medium text-neutral-400">
-                    <span>Google</span>•<span>Tripadvisor</span>•<span>Booking</span>•<span>Agoda</span>
+
+                  {/* Official Aggregator Brand Logos Row */}
+                  <div className="mt-3.5 pt-3.5 border-t border-neutral-100 w-full flex flex-col items-center gap-2">
+                    <div className="flex items-center justify-center gap-1.5 flex-wrap">
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Google 4.9 ★">
+                        <GoogleLogo className="w-4 h-4" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Tripadvisor 5.0 ★">
+                        <TripAdvisorLogo className="w-4 h-4" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Booking.com 9.6">
+                        <BookingLogo className="w-4 h-4" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Agoda 9.2">
+                        <AgodaLogo className="w-5 h-5" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Trip.com 9.7">
+                        <TripComLogo className="w-4 h-4" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Hotels.com 10/10">
+                        <HotelsComLogo className="w-4 h-4" />
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Hostelworld 9.5">
+                        <HostelworldLogo className="w-4 h-4" />
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-neutral-400 font-medium">
+                      Google • Tripadvisor • Booking • Agoda • Trip.com
+                    </span>
                   </div>
                 </div>
               )}
@@ -545,7 +600,29 @@ export function QRStudioClient() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
+                {/* Auto Loop Switch */}
+                <div className="flex items-center justify-between bg-neutral-900/90 border border-neutral-800 px-3.5 py-2 rounded-2xl">
+                  <div className="flex items-center gap-2">
+                    <Activity className={`w-3.5 h-3.5 ${isAutoLoop ? 'text-emerald-400 animate-pulse' : 'text-neutral-500'}`} />
+                    <span className="text-xs text-neutral-300 font-medium">
+                      Auto-Loop Animation (Бесконечный цикл)
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setIsAutoLoop(!isAutoLoop)}
+                    className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                      isAutoLoop ? 'bg-emerald-500' : 'bg-neutral-700'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
+                        isAutoLoop ? 'translate-x-4' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                   {ANIMATION_PRESETS.map((preset) => (
                     <button
                       key={preset.id}
@@ -888,6 +965,49 @@ export function QRStudioClient() {
                 <span className="text-[11px] text-neutral-500">
                   Use 1.0 for square icons, or 1.2–1.4 for wider horizontal logos.
                 </span>
+              </div>
+            </div>
+
+            {/* Section 4: Production Web & Digital Signage Embedding Snippet */}
+            <div className="bg-[#151923] border border-neutral-800 rounded-3xl p-6 flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                  <Code2 className="w-4 h-4 text-[#C5A880]" />
+                  <span>Встраивание анимированного QR (HTML / JS)</span>
+                </h3>
+                <span className="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded-full font-medium">
+                  60 FPS Vector
+                </span>
+              </div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                Для отображения анимированного QR на смарт-экранах в холле, номерах или лендинге используйте следующий код:
+              </p>
+              <div className="relative bg-neutral-950 rounded-2xl p-4 border border-neutral-800 font-mono text-xs text-neutral-300 overflow-x-auto">
+                <pre>{`<!-- 1. Подключение скрипта -->
+<script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
+
+<!-- 2. Элемент QR-кода -->
+<qr-code
+  id="live-qr"
+  contents="${url}"
+  module-color="${moduleColor}"
+  position-ring-color="${ringColor}"
+  position-center-color="${centerColor}"
+  style="width: 260px; height: 260px;"
+>
+  <img src="${activeIconPath || '/logo-haviland-house.png'}" slot="icon" />
+</qr-code>
+
+<!-- 3. Запуск циклической гармонической волны -->
+<script>
+  const qr = document.getElementById('live-qr');
+  qr.addEventListener('codeRendered', () => {
+    // Непрерывная пульсация каждые 2.5 сек (как на видео в bitjson/qr-code)
+    setInterval(() => qr.animateQRCode('RadialRipple'), 2500);
+  });
+  // Анимация при наведении курсора
+  qr.addEventListener('mouseenter', () => qr.animateQRCode('RadialRipple'));
+</script>`}</pre>
               </div>
             </div>
           </div>
