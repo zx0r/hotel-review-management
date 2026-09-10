@@ -23,6 +23,7 @@ import {
   Activity,
   Code2,
   ArrowLeft,
+  Nfc,
 } from 'lucide-react';
 import {
   GoogleLogo,
@@ -30,8 +31,6 @@ import {
   BookingLogo,
   AgodaLogo,
   TripComLogo,
-  HostelworldLogo,
-  HotelsComLogo,
 } from '@/components/BrandIcons';
 
 // Custom element tag reference for React 19
@@ -500,22 +499,24 @@ export function QRStudioClient() {
                 /* Acrylic Stand Mockup */
                 <div
                   onClick={() => triggerAnimation('RadialRipple')}
-                  className="w-full max-w-[330px] bg-white text-neutral-900 rounded-[28px] p-6 shadow-2xl border-4 border-neutral-200/80 flex flex-col items-center text-center relative cursor-pointer select-none"
+                  className="w-full max-w-[360px] sm:max-w-[380px] bg-gradient-to-b from-white via-white to-neutral-50/80 text-neutral-900 rounded-[32px] p-6 sm:p-7 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] border-2 border-[#C5A880]/40 ring-1 ring-neutral-900/5 flex flex-col items-center text-center relative cursor-pointer select-none transition-all hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.4)]"
                 >
-                  <div className="w-10 h-1 rounded-full bg-neutral-200 mb-4" />
-                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C5A880] mb-1">
+                  {/* Top Acrylic Metallic Clip Header */}
+                  <div className="w-12 h-1.5 rounded-full bg-neutral-200/90 mb-3.5" />
+                  <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#B89668] mb-1 font-sans">
                     HAVILAND HOUSE
                   </p>
-                  <h3 className="text-base font-bold text-neutral-900 leading-snug mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight leading-tight">
                     Sujet Marina Hotel
                   </h3>
-                  <div className="flex items-center gap-0.5 text-amber-500 mb-3">
+                  <div className="flex items-center gap-1 text-amber-400 my-2.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                      <Star key={i} className="w-4 h-4 fill-current drop-shadow-2xs" />
                     ))}
                   </div>
 
-                  <div className="p-3 bg-neutral-50 rounded-2xl border border-neutral-100 shadow-inner mb-3">
+                  {/* Enlarged QR Code Canvas */}
+                  <div className="p-3.5 sm:p-4 bg-white rounded-3xl border border-neutral-150 shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
                     <QRCodeElement
                       contents={url}
                       module-color={moduleColor}
@@ -523,8 +524,8 @@ export function QRStudioClient() {
                       position-center-color={centerColor}
                       mask-x-to-y-ratio={maskRatio}
                       style={{
-                        width: '180px',
-                        height: '180px',
+                        width: '230px',
+                        height: '230px',
                         backgroundColor: bgColor,
                         display: 'block',
                       }}
@@ -538,47 +539,83 @@ export function QRStudioClient() {
                             width: '100%',
                             height: '100%',
                             objectFit: 'contain',
-                            borderRadius: '4px',
+                            borderRadius: '5px',
                           }}
                         />
                       )}
                     </QRCodeElement>
                   </div>
 
-                  <p className="text-xs font-semibold text-neutral-900">
-                    Scan to Review Your Stay
-                  </p>
-                  <p className="text-[11px] text-neutral-500 mt-0.5">
-                    Quét mã để chia sẻ cảm nhận kỳ nghỉ
-                  </p>
+                  {/* Tap Your Phone + NFC Premium Pill Badge */}
+                  <div className="flex flex-col items-center gap-1 my-1">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 text-white shadow-md border border-neutral-800 hover:bg-neutral-800 transition-all">
+                      <Nfc className="w-4 h-4 text-[#C5A880] animate-pulse" />
+                      <span className="text-xs font-bold tracking-wide">Tap Your Phone</span>
+                    </div>
+                    <p className="text-[11px] text-neutral-500 font-medium mt-0.5">
+                      or scan QR code with camera
+                    </p>
+                  </div>
 
-                  {/* Official Aggregator Brand Logos Row */}
-                  <div className="mt-3.5 pt-3.5 border-t border-neutral-100 w-full flex flex-col items-center gap-2">
-                    <div className="flex items-center justify-center gap-1.5 flex-wrap">
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Google 4.9 ★">
-                        <GoogleLogo className="w-4 h-4" />
+                  {/* 5 Official Brand Logos with Names Underneath */}
+                  <div className="mt-3 pt-3 border-t border-neutral-200/80 w-full flex flex-col items-center">
+                    <div className="grid grid-cols-5 gap-2 w-full max-w-[340px]">
+                      {/* 1. Google */}
+                      <div className="flex flex-col items-center gap-1 group/logo">
+                        <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Google 4.9 ★">
+                          <GoogleLogo className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                          Google
+                        </span>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Tripadvisor 5.0 ★">
-                        <TripAdvisorLogo className="w-4 h-4" />
+
+                      {/* 2. Tripadvisor */}
+                      <div className="flex flex-col items-center gap-1 group/logo">
+                        <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Tripadvisor 5.0 ★">
+                          <TripAdvisorLogo className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                          Tripadvisor
+                        </span>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Booking.com 9.6">
-                        <BookingLogo className="w-4 h-4" />
+
+                      {/* 3. Booking.com */}
+                      <div className="flex flex-col items-center gap-1 group/logo">
+                        <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Booking.com 9.6">
+                          <BookingLogo className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                          Booking
+                        </span>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Agoda 9.2">
-                        <AgodaLogo className="w-5 h-5" />
+
+                      {/* 4. Agoda */}
+                      <div className="flex flex-col items-center gap-1 group/logo">
+                        <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Agoda 9.2">
+                          <AgodaLogo className="w-7 h-7" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                          Agoda
+                        </span>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Trip.com 9.7">
-                        <TripComLogo className="w-4 h-4" />
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Hotels.com 10/10">
-                        <HotelsComLogo className="w-4 h-4" />
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-white border border-neutral-200/80 shadow-2xs flex items-center justify-center p-1 hover:scale-110 transition-transform" title="Hostelworld 9.5">
-                        <HostelworldLogo className="w-4 h-4" />
+
+                      {/* 5. Trip.com */}
+                      <div className="flex flex-col items-center gap-1 group/logo">
+                        <div className="w-10 h-10 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs flex items-center justify-center p-1.5 group-hover/logo:scale-105 transition-transform" title="Trip.com 9.7">
+                          <TripComLogo className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-semibold text-neutral-700 tracking-tight truncate">
+                          Trip.com
+                        </span>
                       </div>
                     </div>
-                    <span className="text-[10px] text-neutral-400 font-medium">
-                      Google • Tripadvisor • Booking • Agoda • Trip.com
+                  </div>
+
+                  {/* Powered by zx0r signature */}
+                  <div className="mt-3.5 pt-2.5 border-t border-neutral-200/60 w-full flex items-center justify-center">
+                    <span className="text-[10px] font-medium tracking-widest text-neutral-400 uppercase font-mono">
+                      Powered by zx0r
                     </span>
                   </div>
                 </div>
