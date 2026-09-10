@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { PhoneCall, Mail } from 'lucide-react';
 import type { HotelConfig } from '@/config/hotels';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -286,10 +287,16 @@ export function Footer({ hotel }: FooterProps) {
       {/* BOTTOM COPYRIGHT ROW (matching havilandhouse.com)                         */}
       {/* ========================================================================= */}
       <div className="w-full border-t border-neutral-200 bg-white">
-        <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-medium text-neutral-900">
+        <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <p className="text-xs font-medium text-neutral-900">
             © Copyright 2026 Haviland House.
           </p>
+          <Link
+            href="/qr"
+            className="text-xs font-medium text-neutral-500 hover:text-neutral-900 transition-colors"
+          >
+            QR Studio
+          </Link>
         </div>
       </div>
     </footer>
