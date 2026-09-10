@@ -612,10 +612,10 @@ export function QRStudioClient() {
                     </div>
                   </div>
 
-                  {/* Powered by zx0r signature */}
-                  <div className="mt-3.5 pt-2.5 border-t border-neutral-200/60 w-full flex items-center justify-center">
-                    <span className="text-[10px] font-medium tracking-widest text-neutral-400 uppercase font-mono">
-                      Powered by zx0r
+                  {/* Powered by ZX0R signature */}
+                  <div className="mt-6 pt-3 border-t border-neutral-150 w-full flex items-center justify-center">
+                    <span className="text-[8.5px] font-medium tracking-[0.22em] text-neutral-400 uppercase font-mono select-none">
+                      Powered by ZX0R
                     </span>
                   </div>
                 </div>
@@ -642,7 +642,7 @@ export function QRStudioClient() {
                   <div className="flex items-center gap-2">
                     <Activity className={`w-3.5 h-3.5 ${isAutoLoop ? 'text-emerald-400 animate-pulse' : 'text-neutral-500'}`} />
                     <span className="text-xs text-neutral-300 font-medium">
-                      Auto-Loop Animation (Бесконечный цикл)
+                      Auto-Loop Animation (Continuous Ripple)
                     </span>
                   </div>
                   <button
@@ -1010,20 +1010,20 @@ export function QRStudioClient() {
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                   <Code2 className="w-4 h-4 text-[#C5A880]" />
-                  <span>Встраивание анимированного QR (HTML / JS)</span>
+                  <span>Embed Animated QR (HTML / JS)</span>
                 </h3>
                 <span className="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded-full font-medium">
                   60 FPS Vector
                 </span>
               </div>
               <p className="text-xs text-neutral-400 leading-relaxed">
-                Для отображения анимированного QR на смарт-экранах в холле, номерах или лендинге используйте следующий код:
+                To display the live animated QR on digital totems, in-room Smart TVs, or landing pages, use the snippet below:
               </p>
               <div className="relative bg-neutral-950 rounded-2xl p-4 border border-neutral-800 font-mono text-xs text-neutral-300 overflow-x-auto">
-                <pre>{`<!-- 1. Подключение скрипта -->
+                <pre>{`<!-- 1. Load Standalone Web Component Script -->
 <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
 
-<!-- 2. Элемент QR-кода -->
+<!-- 2. Animated QR Code Custom Element -->
 <qr-code
   id="live-qr"
   contents="${url}"
@@ -1035,14 +1035,14 @@ export function QRStudioClient() {
   <img src="${activeIconPath || '/logo-haviland-house.png'}" slot="icon" />
 </qr-code>
 
-<!-- 3. Запуск циклической гармонической волны -->
+<!-- 3. Initialize Harmonic Wave Animation -->
 <script>
   const qr = document.getElementById('live-qr');
   qr.addEventListener('codeRendered', () => {
-    // Непрерывная пульсация каждые 2.5 сек (как на видео в bitjson/qr-code)
+    // Continuous harmonic ripple every 2.5s (as shown in demo)
     setInterval(() => qr.animateQRCode('RadialRipple'), 2500);
   });
-  // Анимация при наведении курсора
+  // Trigger ripple wave on hover
   qr.addEventListener('mouseenter', () => qr.animateQRCode('RadialRipple'));
 </script>`}</pre>
               </div>
