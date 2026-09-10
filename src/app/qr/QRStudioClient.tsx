@@ -354,17 +354,19 @@ export function QRStudioClient() {
     ${qrInner}
   </svg>
 
-  <!-- Tap Your Phone + NFC Premium Pill Badge -->
-  <g transform="translate(133, 353)">
-    <rect width="134" height="30" rx="15" fill="#171717"/>
-    <g transform="translate(14, 7) scale(0.65)" stroke="#C5A880" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
-      <path d="M4 12a8 8 0 0 1 8-8"/>
-      <path d="M4 17a13 13 0 0 1 13-13"/>
-      <path d="M4 22a18 18 0 0 1 18-18"/>
+  <!-- Tap Your Phone + NFC Premium Pill Badge (Compact Luxury) -->
+  <g transform="translate(137, 354)">
+    <rect width="126" height="22" rx="11" fill="#171717"/>
+    <!-- Official Lucide NFC Waves Icon -->
+    <g transform="translate(11, 3) scale(0.67)" fill="none" stroke="#C5A880" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"/>
+      <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"/>
+      <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8"/>
+      <path d="M16.37 2a20.16 20.16 0 0 1 0 20"/>
     </g>
-    <text x="36" y="19.5" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="0.04em">Tap Your Phone</text>
+    <text x="31" y="15" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0.02em">Tap Your Phone</text>
   </g>
-  <text x="200" y="401" text-anchor="middle" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">or scan QR code with camera</text>
+  <text x="200" y="390" text-anchor="middle" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="400">or scan QR code with camera</text>
 
   <!-- Divider 1 -->
   <line x1="36" y1="416" x2="364" y2="416" stroke="#EAEAEA" stroke-width="1"/>
@@ -812,12 +814,12 @@ export function QRStudioClient() {
                   </div>
 
                   {/* Tap Your Phone + NFC Premium Pill Badge */}
-                  <div className="flex flex-col items-center gap-1 my-1">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 text-white shadow-md border border-neutral-800 hover:bg-neutral-800 transition-all">
-                      <Nfc className="w-4 h-4 text-[#C5A880] animate-pulse" />
-                      <span className="text-xs font-bold tracking-wide">Tap Your Phone</span>
+                  <div className="flex flex-col items-center gap-1 my-0.5">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-white shadow-xs border border-neutral-800 hover:bg-neutral-800 transition-all">
+                      <Nfc className="w-3.5 h-3.5 text-[#C5A880] animate-pulse" />
+                      <span className="text-[10.5px] font-semibold tracking-wide">Tap Your Phone</span>
                     </div>
-                    <p className="text-[11px] text-neutral-500 font-medium mt-0.5">
+                    <p className="text-[10px] text-neutral-500 font-normal mt-0.5">
                       or scan QR code with camera
                     </p>
                   </div>
