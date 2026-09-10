@@ -66,17 +66,17 @@ Reputation algorithms are not static averages; they are multi-variable temporal 
 
 ```mermaid
 graph TD
-    A[Guest Touchpoint Interaction] -->|Scan / Tap| B[Centralized Review Hub]
-    B -->|Verified Positive Path| C[Multi-Channel Distribution Engine]
-    B -->|Friction / Concierge Path| D[Instant In-Stay Service Recovery]
+    A["Guest Touchpoint Interaction"] -->|Scan / Tap| B["Centralized Review Hub"]
+    B -->|Verified Positive Path| C["Multi-Channel Distribution Engine"]
+    B -->|Friction / Concierge Path| D["Instant In-Stay Service Recovery"]
     
-    C --> E[Google Local 3-Pack Algorithm]
-    C --> F[TripAdvisor Popularity Index]
-    C --> G[OTA Algorithmic Distribution]
+    C --> E["Google Local 3-Pack Algorithm"]
+    C --> F["TripAdvisor Popularity Index"]
+    C --> G["OTA Algorithmic Distribution"]
 
-    E -->|Velocity + Recency + Sentiment| H[Organic Geo-Search Dominance]
-    F -->|Quality + Quantity + Decay Half-Life| I[Top Destination Tier Ranking]
-    G -->|Conversion Rate + Review Multiplier| J[Preferred Partner Lower Commission]
+    E -->|Velocity + Recency + Sentiment| H["Organic Geo-Search Dominance"]
+    F -->|Quality + Quantity + Decay Half-Life| I["Top Destination Tier Ranking"]
+    G -->|Conversion Rate + Review Multiplier| J["Preferred Partner Lower Commission"]
 ```
 
 1. **Google Local 3-Pack (Maps SEO)**:
@@ -116,21 +116,21 @@ The **Service Recovery Paradox (SRP)** (*Smith, Bolton & Wagner, 1999*) posits t
 sequenceDiagram
     autonumber
     actor Guest as Hotel Guest
-    participant Stand as A5 Stand / Keycard
+    participant Stand as A5 Stand or Keycard
     participant Hub as Haviland Review Hub
-    participant Duty as Duty Manager / Front Office
-    participant Public as Google / TripAdvisor
+    participant Duty as Duty Manager
+    participant Public as Google or TripAdvisor
 
     Guest->>Stand: Taps Phone (NFC) or Scans QR
-    Stand->>Hub: Immediate Low-Latency Load (<500ms)
-    alt Guest Experience: Delighted (5-Star Intent)
+    Stand->>Hub: Immediate Low-Latency Load (under 500ms)
+    alt Delighted Guest (5-Star Intent)
         Hub->>Public: 1-Tap Deep Link to Google Maps / OTA Review Flow
         Guest->>Public: Submits 5-Star Public Review with Photography
-    else Guest Experience: Friction / Grievance Detected
+    else Friction or Grievance Detected
         Hub->>Duty: Triggers Direct Zalo / WhatsApp Hotline Link
         Guest->>Duty: Real-Time In-Stay Communication
-        Duty->>Guest: Immediate Service Recovery (Room change, amenity, direct apology)
-        Note over Guest,Public: Public negative review prevented; Service Recovery Paradox engaged
+        Duty->>Guest: Immediate Service Recovery (Room change, amenity, apology)
+        Note over Guest,Public: Public negative review prevented - Service Recovery Paradox engaged
     end
 ```
 
@@ -236,16 +236,16 @@ To liberate property managers from specialized design software (Adobe InDesign /
 
 ```mermaid
 graph LR
-    A[Custom Web Component: qr-code] -->|Inspect Shadow DOM| B[Extract Path Nodes & Matrix]
-    B -->|Synthesize SVG Document| C{Export Format Selection}
+    A["Custom Web Component: qr-code"] -->|Inspect Shadow DOM| B["Extract Path Nodes and Matrix"]
+    B -->|Synthesize SVG Document| C{"Export Format Selection"}
     
-    C -->|Pure Vector| D[Standalone .SVG Download]
-    C -->|A5 Stand Mockup SVG| E[Full Card .SVG with Embedded Fonts & Logos]
-    C -->|High-Res Rasterization| F[Off-Screen HTML5 Canvas Engine]
+    C -->|Pure Vector| D["Standalone .SVG Download"]
+    C -->|A5 Stand Mockup SVG| E["Full Card .SVG with Embedded Fonts and Logos"]
+    C -->|High-Res Rasterization| F["Off-Screen HTML5 Canvas Engine"]
     
-    F -->|Scale Factor: 2x / 4x| G[1024px Screen PNG]
-    F -->|Scale Factor: 4.2x / 300 DPI| H[2048px Print-Ready PNG]
-    F -->|Scale Factor: 8.5x / Ultra-DPI| I[4096px 4K Master PNG]
+    F -->|Scale Factor: 2x / 4x| G["1024px Screen PNG"]
+    F -->|Scale Factor: 4.2x / 300 DPI| H["2048px Print-Ready PNG"]
+    F -->|Scale Factor: 8.5x / Ultra-DPI| I["4096px 4K Master PNG"]
 ```
 
 #### Key Engineering Highlights of the Canvas Pipeline:
