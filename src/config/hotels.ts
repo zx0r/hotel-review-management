@@ -149,7 +149,7 @@ export const HOTELS: Record<string, HotelConfig> = {
       enabled: true,
       title: 'Need Immediate Concierge Assistance?',
       description: 'If any detail of your stay was less than perfect, our General Management and Concierge team are on standby 24/7 to make it right immediately.',
-      conciergePhone: '+84 236 3888 999',
+      conciergePhone: '+84 888 814 778',
       conciergeEmail: 'concierge@havilandhouse.com',
       workingHours: 'Available 24/7 for In-House Guests',
     },

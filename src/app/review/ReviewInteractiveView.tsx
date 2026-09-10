@@ -8,8 +8,7 @@ import {
   ShieldCheck,
   CheckCircle2,
   Phone,
-  Mail,
-  Clock,
+  MessageSquare,
   HeartHandshake,
 } from 'lucide-react';
 import type { HotelConfig } from '@/config/hotels';
@@ -47,9 +46,23 @@ export function ReviewInteractiveView({
   hotel,
   liveReviews,
 }: ReviewInteractiveViewProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedStars, setSelectedStars] = useState<number>(5);
   const [hoveredStars, setHoveredStars] = useState<number | null>(null);
+
+  const getContactUrl = () => {
+    switch (language) {
+      case 'en':
+        return 'https://havilandhouse.com/en/contact-us';
+      case 'ko':
+        return 'https://havilandhouse.com/ko/contact-us';
+      case 'zh':
+        return 'https://havilandhouse.com/zh/contact-us';
+      case 'vi':
+      default:
+        return 'https://havilandhouse.com/lien-he';
+    }
+  };
 
   const activeStars = hoveredStars ?? selectedStars;
 
@@ -142,17 +155,21 @@ export function ReviewInteractiveView({
           </p>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
             <a
-              href={`tel:${hotel.privateFeedback.conciergePhone.replace(/\s+/g, '')}`}
+              href="tel:1900232343"
+              onClick={() => trackReviewHubEvent('concierge_call_click', { number: '1900232343' })}
               className="inline-flex items-center justify-center gap-2 bg-neutral-900 text-white hover:bg-neutral-800 px-4 py-2.5 rounded-full text-xs font-semibold transition-all active:scale-95"
             >
               <Phone className="size-3.5 text-amber-400" />
               <span>{t.concierge.callBtn}</span>
             </a>
             <a
-              href={`mailto:${hotel.privateFeedback.conciergeEmail}?subject=Immediate%20Guest%20Assistance`}
+              href={getContactUrl()}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              onClick={() => trackReviewHubEvent('concierge_message_click', { url: getContactUrl() })}
               className="inline-flex items-center justify-center gap-2 bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-900 px-4 py-2.5 rounded-full text-xs font-semibold transition-all active:scale-95"
             >
-              <Mail className="size-3.5 text-neutral-500" />
+              <MessageSquare className="size-3.5 text-neutral-600" />
               <span>{t.concierge.emailBtn}</span>
             </a>
           </div>
@@ -225,42 +242,6 @@ export function ReviewInteractiveView({
           );
         })}
       </section>
-
-      {/* 24/7 Concierge Bottom Support Card */}
-      <div className="w-full bg-white rounded-3xl p-6 border border-neutral-200/80 shadow-xs text-left">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="size-2 rounded-full bg-orange-500 animate-pulse" />
-          <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
-            {t.concierge.tag}
-          </span>
-        </div>
-        <h3 className="text-base font-semibold tracking-tight text-neutral-900">
-          {t.concierge.title}
-        </h3>
-        <p className="text-xs text-neutral-600 mt-1 leading-relaxed">
-          {t.concierge.description}
-        </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 mt-4">
-          <a
-            href={`tel:${hotel.privateFeedback.conciergePhone.replace(/\s+/g, '')}`}
-            className="inline-flex items-center justify-center gap-2 bg-neutral-900 text-white hover:bg-neutral-800 px-4 py-2 rounded-full text-xs font-medium transition-all"
-          >
-            <Phone className="size-3.5 text-amber-400" />
-            <span>{t.concierge.callBtn}</span>
-          </a>
-          <a
-            href={`mailto:${hotel.privateFeedback.conciergeEmail}`}
-            className="inline-flex items-center justify-center gap-2 bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-900 px-4 py-2 rounded-full text-xs font-medium transition-all"
-          >
-            <Mail className="size-3.5 text-neutral-500" />
-            <span>{t.concierge.emailBtn}</span>
-          </a>
-        </div>
-        <div className="flex items-center gap-1.5 mt-3 text-[11px] text-neutral-500">
-          <Clock className="size-3 text-orange-500" />
-          <span>{t.concierge.hours}</span>
-        </div>
-      </div>
     </div>
   );
 }

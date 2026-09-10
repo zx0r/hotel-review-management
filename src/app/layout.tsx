@@ -4,6 +4,7 @@ import { siteViewport } from "./viewport";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FloatingContactWidget } from "@/components/FloatingContactWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -76,6 +77,7 @@ export default async function RootLayout({
             <main className="w-full flex-1">{children}</main>
             <Footer hotel={hotel} />
           </div>
+          <FloatingContactWidget />
         </LanguageProvider>
       </body>
     </html>
