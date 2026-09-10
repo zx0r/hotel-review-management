@@ -1,4 +1,4 @@
-export type ReviewPlatformId = 'google' | 'tripadvisor' | 'booking' | 'agoda';
+export type ReviewPlatformId = 'google' | 'tripadvisor' | 'booking' | 'agoda' | 'tripcom' | 'hostelworld' | 'hotelscom';
 
 export interface ReviewPlatformLink {
   id: ReviewPlatformId;
@@ -88,7 +88,7 @@ export const HOTELS: Record<string, HotelConfig> = {
     socialProof: {
       overallRating: 4.9,
       maxRating: 5.0,
-      reviewCount: 219,
+      reviewCount: 83,
       starCount: 5,
       headline: 'How was your stay with us?',
       subheadline: 'Your authentic feedback inspires our hospitality. Tap below to leave a review on your preferred platform.',
@@ -131,6 +131,42 @@ export const HOTELS: Record<string, HotelConfig> = {
           'https://www.agoda.com/sujet-marina-da-nang-hotel-by-haviland/hotel/da-nang-vn.html#reviews',
         brandColor: '#2B6CB0',
         brandBg: '#EBF4FF',
+      },
+      {
+        id: 'tripcom',
+        name: 'Trip.com',
+        badgeLabel: 'Amazing 9.7',
+        ratingScore: '9.7 / 10',
+        totalReviews: '71 reviews',
+        description: 'Share your experience with millions of Trip.com travelers.',
+        directReviewUrl:
+          'https://www.trip.com/hotels/da-nang-hotel-detail-134108126/sujet-marina-hotel-da-nang-by-haviland/',
+        brandColor: '#FF5533',
+        brandBg: '#FFF0ED',
+      },
+      {
+        id: 'hostelworld',
+        name: 'Hostelworld',
+        badgeLabel: 'Superb 9.5',
+        ratingScore: '9.5 / 10',
+        totalReviews: '7 reviews',
+        description: 'Leave a verified review for global backpacker community.',
+        directReviewUrl:
+          'https://www.hostelworld.com/hotels/p/338586/sujet-marina-da-nang-hotel-by-haviland/',
+        brandColor: '#FF6600',
+        brandBg: '#FFF3E8',
+      },
+      {
+        id: 'hotelscom',
+        name: 'Hotels.com',
+        badgeLabel: 'Exceptional 10/10',
+        ratingScore: '10 / 10',
+        totalReviews: '1 review',
+        description: 'Share your experience on Hotels.com for verified guests.',
+        directReviewUrl:
+          'https://www.hotels.com/ho4104681184/',
+        brandColor: '#D50000',
+        brandBg: '#FFF0F0',
       },
       {
         id: 'tripadvisor',

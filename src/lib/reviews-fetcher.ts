@@ -12,6 +12,12 @@ export const DIRECT_REVIEW_LINKS = {
     'https://www.booking.com/hotel/vn/sujet-marina-da-nang-by-haviland.html#tab-reviews',
   agoda:
     'https://www.agoda.com/sujet-marina-da-nang-hotel-by-haviland/hotel/da-nang-vn.html#reviews',
+  tripcom:
+    'https://www.trip.com/hotels/da-nang-hotel-detail-134108126/sujet-marina-hotel-da-nang-by-haviland/',
+  hostelworld:
+    'https://www.hostelworld.com/hotels/p/338586/sujet-marina-da-nang-hotel-by-haviland/',
+  hotelscom:
+    'https://www.hotels.com/ho4104681184/',
 };
 
 // 1. Live Fetcher for Booking.com (Live JSON-LD schema extraction)
@@ -228,6 +234,45 @@ export async function fetchLiveReviews(hotelSlug = 'sujet-marina'): Promise<Live
       directReviewUrl: DIRECT_REVIEW_LINKS.tripadvisor,
       brandColor: '#00AA6C',
       brandBg: '#E6F7F0',
+    },
+    {
+      id: 'tripcom',
+      name: 'Trip.com',
+      badgeLabel: 'Amazing 9.7',
+      ratingScore: 9.7,
+      maxScore: 10.0,
+      ratingFormatted: '9.7 / 10',
+      totalReviews: 71,
+      totalReviewsFormatted: '71 reviews',
+      directReviewUrl: DIRECT_REVIEW_LINKS.tripcom,
+      brandColor: '#FF5533',
+      brandBg: '#FFF0ED',
+    },
+    {
+      id: 'hostelworld',
+      name: 'Hostelworld',
+      badgeLabel: 'Superb 9.5',
+      ratingScore: 9.5,
+      maxScore: 10.0,
+      ratingFormatted: '9.5 / 10',
+      totalReviews: 7,
+      totalReviewsFormatted: '7 reviews',
+      directReviewUrl: DIRECT_REVIEW_LINKS.hostelworld,
+      brandColor: '#FF6600',
+      brandBg: '#FFF3E8',
+    },
+    {
+      id: 'hotelscom',
+      name: 'Hotels.com',
+      badgeLabel: 'Exceptional 10/10',
+      ratingScore: 10.0,
+      maxScore: 10.0,
+      ratingFormatted: '10 / 10',
+      totalReviews: 1,
+      totalReviewsFormatted: '1 review',
+      directReviewUrl: DIRECT_REVIEW_LINKS.hotelscom,
+      brandColor: '#D50000',
+      brandBg: '#FFF0F0',
     },
   ];
 

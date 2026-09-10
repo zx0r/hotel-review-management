@@ -1,4 +1,5 @@
-export type PlatformId = 'google' | 'tripadvisor' | 'booking' | 'agoda';
+export type PlatformId = 'google' | 'tripadvisor' | 'booking' | 'agoda' | 'tripcom' | 'hostelworld' | 'hotelscom';
+
 
 export interface PlatformReviewData {
   id: PlatformId;

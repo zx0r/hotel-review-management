@@ -10,6 +10,9 @@ import {
   TripAdvisorLogo,
   BookingLogo,
   AgodaLogo,
+  TripComLogo,
+  HostelworldLogo,
+  HotelsComLogo,
 } from '@/components/BrandIcons';
 import { PrivateConciergeCard } from '@/components/PrivateConciergeCard';
 
@@ -28,6 +31,12 @@ function PlatformIcon({ id }: { id: string }) {
       return <BookingLogo className="w-8 h-8 sm:w-9 sm:h-9" />;
     case 'agoda':
       return <AgodaLogo className="w-8 h-8 sm:w-9 sm:h-9" />;
+    case 'tripcom':
+      return <TripComLogo className="w-8 h-8 sm:w-9 sm:h-9" />;
+    case 'hostelworld':
+      return <HostelworldLogo className="w-8 h-8 sm:w-9 sm:h-9" />;
+    case 'hotelscom':
+      return <HotelsComLogo className="w-8 h-8 sm:w-9 sm:h-9" />;
     default:
       return null;
   }

@@ -4,7 +4,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import type { PlatformReviewData } from '@/lib/types/reviews';
 import { trackReviewHubEvent } from '@/lib/analytics';
-import { GoogleLogo, TripAdvisorLogo, BookingLogo, AgodaLogo } from './BrandIcons';
+import { GoogleLogo, TripAdvisorLogo, BookingLogo, AgodaLogo, TripComLogo, HostelworldLogo, HotelsComLogo } from './BrandIcons';
 
 interface ReviewPlatformCardProps {
   platform: PlatformReviewData;
@@ -21,6 +21,12 @@ function PlatformLogoComponent({ id }: { id: string }) {
       return <BookingLogo className="w-7 h-7" />;
     case 'agoda':
       return <AgodaLogo className="w-8 h-8" />;
+    case 'tripcom':
+      return <TripComLogo className="w-7 h-7" />;
+    case 'hostelworld':
+      return <HostelworldLogo className="w-7 h-7" />;
+    case 'hotelscom':
+      return <HotelsComLogo className="w-7 h-7" />;
     default:
       return null;
   }

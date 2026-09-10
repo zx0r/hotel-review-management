@@ -19,6 +19,9 @@ import {
   TripAdvisorLogo,
   BookingLogo,
   AgodaLogo,
+  TripComLogo,
+  HostelworldLogo,
+  HotelsComLogo,
 } from '@/components/BrandIcons';
 import { trackReviewHubEvent } from '@/lib/analytics';
 
@@ -37,6 +40,12 @@ function PlatformIcon({ id }: { id: string }) {
       return <BookingLogo className="size-7 sm:size-8" />;
     case 'agoda':
       return <AgodaLogo className="size-7 sm:size-8" />;
+    case 'tripcom':
+      return <TripComLogo className="size-7 sm:size-8" />;
+    case 'hostelworld':
+      return <HostelworldLogo className="size-7 sm:size-8" />;
+    case 'hotelscom':
+      return <HotelsComLogo className="size-7 sm:size-8" />;
     default:
       return null;
   }
